@@ -286,8 +286,9 @@ system_node_install() {
   sleep 2
   npm install -g npm@latest
   sleep 2
-  sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-  wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+  curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor -o /usr/share/keyrings/pgdg.gpg
+  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/pgdg.gpg] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+  sudo apt-get update -y
   sudo apt-get update -y && sudo apt-get -y install postgresql
   sleep 2
   sudo timedatectl set-timezone America/Sao_Paulo
@@ -313,11 +314,9 @@ system_docker_install() {
                  ca-certificates curl \
                  software-properties-common
 
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-  
-  add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+  sleep 2
+  curl -sSL https://get.docker.com/ | sh
 
-  apt install -y docker-ce
 EOF
 
   sleep 2
@@ -507,6 +506,10 @@ sudo su - root << EOF
 
 cat > /etc/nginx/conf.d/deploy.conf << 'END'
 client_max_body_size 100M;
+large_client_header_buffers 4 16k;
+client_body_buffer_size 16k;
+proxy_buffer_size 32k;
+proxy_buffers 8 32k;
 END
 
 EOF
