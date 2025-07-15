@@ -39,7 +39,7 @@ system_git_clone() {
   sleep 2
 
   sudo su - deploy <<EOF
-  git clone https://atendechat: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@github.com/atendechat-org/codatendechat.git /home/deploy/${instancia_add}/
+  git clone https://github.com/luisfilipegdc/whaticketsaas.git /home/deploy/${instancia_add}/
 
   sleep 2
 }
