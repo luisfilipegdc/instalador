@@ -8,13 +8,7 @@ get_mysql_root_password() {
   read -p "> " mysql_root_password
 }
 
-get_link_git() {
-  
-  print_banner
-  printf "${WHITE} 💻 Insira o link do GITHUB do Whaticket que deseja instalar:${GRAY_LIGHT}"
-  printf "\n\n"
-  read -p "> " link_git
-}
+
 
 get_instancia_add() {
   
@@ -201,14 +195,14 @@ software_dominio() {
 inquiry_options() {
   
   print_banner
-  printf "${WHITE} 💻 Bem vindo(a) ao Gerenciador Whaticket SaaS, Selecione abaixo a proxima ação!${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Bem vindo(a) ao Gerenciador Atendechat, Selecione abaixo a proxima ação!${GRAY_LIGHT}"
   printf "\n\n"
-  printf "   [0] Instalar whaticket\n"
-  printf "   [1] Atualizar whaticket\n"
-  printf "   [2] Deletar Whaticket\n"
-  printf "   [3] Bloquear Whaticket\n"
-  printf "   [4] Desbloquear Whaticket\n"
-  printf "   [5] Alter. dominio Whaticket\n"
+  printf "   [0] Instalar Atendechat\n"
+  printf "   [1] Atualizar Atendechat\n"
+  printf "   [2] Deletar Atendechat\n"
+  printf "   [3] Bloquear Atendechat\n"
+  printf "   [4] Desbloquear Atendechat\n"
+  printf "   [5] Alter. dominio Atendechat\n"
   printf "\n"
   read -p "> " option
 

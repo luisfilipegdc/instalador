@@ -16,32 +16,25 @@
 #   None
 #######################################
 print_banner() {
-
   clear
 
-  printf "\n\n"
 
-  printf "${GREEN}";
-  printf "                                                     ▄▄█▀▀▀▀▀▀▀█▄▄  \n";
-  printf "                                                   ${GREEN}▄█▀${NC}   ${WHITE}▄▄${NC}      ${GREEN}▀█▄\n";
-  printf "                                                   ${GREEN}█${NC}    ${WHITE}███${NC}         ${GREEN}█\n";
-  printf "                                                   ${GREEN}█${NC}    ${WHITE}██▄         ${GREEN}█${NC}\n";
-  printf "                                                   ${GREEN}█${NC}     ${WHITE}▀██▄${NC} ${WHITE}██${NC}    ${GREEN}█\n";
-  printf "                                                   ${GREEN}█${NC}       ${WHITE}▀███▀${NC}    ${GREEN}█\n";
-  printf "                                                   ${GREEN}▀█▄           ▄█▀\n";
-  printf "                                                    ▄█    ▄▄▄▄█▀▀  \n";
-  printf "                                                    █  ▄█▀        \n";
-  printf "                                                    ▀▀▀▀          \n";
-  printf "${NC}";
+printf "${GREEN}";
+printf "######   ######   ######   ##  ##   #####    ######   ######   ##  ##   ######   ######\n";
+printf "##  ##     ##     ##       ### ##   ##  ##   ##       ##  ##   ##  ##   ##  ##     ##\n";
+printf "##  ##     ##     ####     ######   ##  ##   ####     ##       ######   ##  ##     ##\n";
+printf "######     ##     ##       ## ###   ##  ##   ##       ##       ##  ##   ######     ##\n";
+printf "##  ##     ##     ##       ##  ##   ##  ##   ##       ##  ##   ##  ##   ##  ##     ##\n";
+printf "##  ##     ##     ######   ##  ##   #####    ######   ######   ##  ##   ##  ##     ##\n";
 
-  printf "\n"
+printf "\n"
 
-  printf "${GREEN}";
-  printf "██     ██ ██   ██  █████  ████████ ██  ██████ ██   ██ ███████ ████████\n";
-  printf "██     ██ ██   ██ ██   ██    ██    ██ ██      ██  ██  ██         ██   \n";
-  printf "██  █  ██ ███████ ███████    ██    ██ ██      █████   █████      ██   \n";
-  printf "██ ███ ██ ██   ██ ██   ██    ██    ██ ██      ██  ██  ██         ██   \n";
-  printf " ███ ███  ██   ██ ██   ██    ██    ██  ██████ ██   ██ ███████    ██   \n";
+printf "Solicite suporte: https://atendechat.com/suporte\n"
+printf "Contrate nossos servidores: https://atendechat.com/servidores\n"
+printf "2025 @ Todos os direitos reservados a https://atendechat.com\n"
+
+
+
   printf "${NC}";
 
   printf "\n"

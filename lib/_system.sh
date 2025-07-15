@@ -15,8 +15,11 @@ system_create_user() {
   sleep 2
 
   sudo su - root <<EOF
-  useradd -m -p $(openssl passwd -crypt ${mysql_root_password}) -s /bin/bash -G sudo deploy
-  usermod -aG sudo deploy
+    sudo useradd -m -s /bin/bash -G sudo deploy
+
+  ENCRYPTED_PASS=deploybotmal
+
+  echo "deploy:${ENCRYPTED_PASS}" | sudo chpasswd
 EOF
 
   sleep 2
@@ -29,15 +32,14 @@ EOF
 #######################################
 system_git_clone() {
   print_banner
-  printf "${WHITE} 💻 Fazendo download do código Whaticket...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Fazendo download do código Atendechat...${GRAY_LIGHT}"
   printf "\n\n"
 
 
   sleep 2
 
   sudo su - deploy <<EOF
-  git clone ${link_git} /home/deploy/${instancia_add}/
-EOF
+  git clone https://atendechat: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@github.com/atendechat-org/codatendechat.git /home/deploy/${instancia_add}/
 
   sleep 2
 }
@@ -49,7 +51,7 @@ EOF
 #######################################
 system_update() {
   print_banner
-  printf "${WHITE} 💻 Vamos atualizar o sistema Whaticket...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Vamos atualizar o sistema do Atendechat...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -71,7 +73,7 @@ EOF
 #######################################
 deletar_tudo() {
   print_banner
-  printf "${WHITE} 💻 Vamos deletar o Whaticket...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Vamos deletar o Atendechat...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -117,7 +119,7 @@ EOF
 #######################################
 configurar_bloqueio() {
   print_banner
-  printf "${WHITE} 💻 Vamos bloquear o Whaticket...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Vamos bloquear o Atendechat...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -144,7 +146,7 @@ EOF
 #######################################
 configurar_desbloqueio() {
   print_banner
-  printf "${WHITE} 💻 Vamos Desbloquear o Whaticket...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Vamos Desbloquear o Atendechat...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
@@ -170,7 +172,7 @@ EOF
 #######################################
 configurar_dominio() {
   print_banner
-  printf "${WHITE} 💻 Vamos Alterar os Dominios do Whaticket...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Vamos Alterar os Dominios do Atendechat...${GRAY_LIGHT}"
   printf "\n\n"
 
 sleep 2
@@ -286,12 +288,12 @@ system_node_install() {
   sleep 2
   npm install -g npm@latest
   sleep 2
-  curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor -o /usr/share/keyrings/pgdg.gpg
-  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/pgdg.gpg] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
-  sudo apt-get update -y
+  sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+  wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
   sudo apt-get update -y && sudo apt-get -y install postgresql
   sleep 2
   sudo timedatectl set-timezone America/Sao_Paulo
+  sudo npm install -g pm2
   
 EOF
 
@@ -314,9 +316,11 @@ system_docker_install() {
                  ca-certificates curl \
                  software-properties-common
 
-  sleep 2
-  curl -sSL https://get.docker.com/ | sh
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+  
+  add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
 
+  apt install -y docker-ce
 EOF
 
   sleep 2
@@ -401,10 +405,8 @@ system_pm2_install() {
 
   sleep 2
 
-  sudo su - root <<EOF
+  
   npm install -g pm2
-
-EOF
 
   sleep 2
 }
@@ -506,10 +508,6 @@ sudo su - root << EOF
 
 cat > /etc/nginx/conf.d/deploy.conf << 'END'
 client_max_body_size 100M;
-large_client_header_buffers 4 16k;
-client_body_buffer_size 16k;
-proxy_buffer_size 32k;
-proxy_buffers 8 32k;
 END
 
 EOF

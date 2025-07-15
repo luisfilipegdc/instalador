@@ -79,15 +79,7 @@ USER_LIMIT=${max_user}
 CONNECTIONS_LIMIT=${max_whats}
 CLOSED_SEND_BY_ME=true
 
-#RECAPTCHA_SECRET_KEY=
-#APP_HOSTNAME=
-
-MAIL_HOST="smtp.hostinger.com"
-MAIL_USER="contato@seusite.com"
-MAIL_PASS="senha"
-MAIL_FROM="Recuperar Senha <contato@seusite.com>"
-MAIL_PORT="465"
-MAIL_SECURE=false
+npm_package_version="6.0.1"
 
 [-]EOF
 EOF
@@ -109,7 +101,7 @@ backend_node_dependencies() {
 
   sudo su - deploy <<EOF
   cd /home/deploy/${instancia_add}/backend
-  npm install
+  npm install --force
 EOF
 
   sleep 2
